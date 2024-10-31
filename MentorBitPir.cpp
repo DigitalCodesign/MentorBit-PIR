@@ -32,13 +32,21 @@
 #include <MentorBitPir.h>
 
 
-MentorBitPir::MentorBitPir(uint8_t pin_pir){
-    _pin_pir = pin_pir;
-    pinMode(_pin_pir,INPUT);
+MentorBitPir::MentorBitPir(uint8_t pin_pir = 0){
+    _port.gpios[1] = pin_pir;
 }
 
 bool MentorBitPir::lecturaDigital(){
     bool value;
-    value = digitalRead(_pin_pir);
+    value = digitalRead(_port.gpios[1]);
     return value;
+}
+
+void MentorBitPir::configPort(const Port& port) {
+
+    _port.type = port.type;
+    _port.location = port.location;
+    _port.gpios[0] = port.gpios[0];
+    _port.gpios[1] = port.gpios[1];
+
 }

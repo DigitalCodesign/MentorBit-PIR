@@ -33,18 +33,20 @@
 #define MentorBitPir_h
 
 #include <arduino.h>
+#include <MentorPort.h>
 
-class MentorBitPir
+class MentorBitPir : public MentorPort
 {
 
     public:
 
         MentorBitPir(uint8_t pin_pir);
         bool lecturaDigital();
+        void confirPort(const Port& port) override;
 
     private:
 
-        uint8_t _pin_pir;
+        Port _port;
 
 };
 
