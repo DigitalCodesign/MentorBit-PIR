@@ -40,9 +40,9 @@ class MentorBitPir : public MentorPort
 
     public:
 
-        MentorBitPir(uint8_t pin_pir);
+        MentorBitPir(uint8_t pin_pir = 0);
         bool lecturaDigital();
-        void confirPort(const Port& port) override;
+        void configPort(const Port& port) override;
 
     private:
 
