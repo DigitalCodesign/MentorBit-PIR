@@ -1,33 +1,45 @@
-# MentorBit-PIR
+# MentorBitPir
 
-Esta librería está construida por Digital Codesign para utilizar el módulo PIR, principalmente diseñado para el kit educacional "MentorBit".
+Librería para la detección de movimiento mediante sensor PIR en módulos compatibles con MentorBit.
 
-Puedes encontrar nuestro MentorBit y mucho más material de electrónica y robótica en nuestra tienda oficial: [https://digitalcodesign.com/shop](https://digitalcodesign.com/shop)
+## Descripción
 
-# Modo de empleo
+La librería `MentorBitPir` facilita la detección de movimiento utilizando un sensor PIR (Passive Infrared) en módulos compatibles con MentorBit. Permite detectar la presencia de personas, animales u objetos en movimiento dentro del rango del sensor, ideal para aplicaciones de seguridad, automatización del hogar y proyectos interactivos.
 
-Una vez tengamos la librería instalada desde el Arduino IDE, tenemos que incluir la librería con la siguiente línea:
+## Modo de Empleo
 
-```
-#include <MentorBitPir.h>
-```
+1.  **Instalación:**
+    * Abre el IDE compatible con MentorBit.
+    * Ve a "Herramientas" -> "Gestionar librerías..."
+    * Busca "MentorBitPir" e instálala.
+
+2.  **Ejemplo básico:**
+
+    ```c++
+    #include <MentorBitPir.h>
+
+    MentorBitPir pir(2); // Sensor PIR conectado al pin 2
+
+    void setup() {
+      Serial.begin(9600);
+      Serial.println("Sensor PIR inicializado.");
+    }
+
+    void loop() {
+      if (pir.lecturaDigital()) {
+        Serial.println("Movimiento detectado!");
+      }
+      delay(100);
+    }
+    ```
+
+## Constructor y Métodos Públicos
 
 ### Constructor
 
-Una vez incluida la librería, usamos el constructor para crear el objeto del módulo PIR, y definir el pin al que está conectado el sensor PIR:
+* `MentorBitPir(uint8_t pin_pir = 0)`: Crea un objeto `MentorBitPir`.
+    * `pin_pir`: Número de pin digital al que está conectado el sensor PIR. Si no se especifica, se asume que no está conectado a ningún pin inicialmente.
 
-```
-MentorBitPir pir(PIN_PIR);
-```
+### Métodos
 
-Donde `PIN_PIR` es el pin al que está conectado el sensor PIR.
-
-### Uso
-
-Con el objeto `pir` definido, podemos obtener la lectura digital del sensor utilizando la función `lecturaDigital()`, que devuelve un valor de tipo `bool`:
-
-```
-bool valor = pir.lecturaDigital();
-```
-
-El valor devuelto será `true` si el sensor detecta movimiento y `false` si no hay movimiento.
+* `bool lecturaDigital()`: Devuelve `true` si se detecta movimiento, `false` en caso contrario.
